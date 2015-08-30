@@ -1,12 +1,23 @@
 {
   "name": "link-myaccounts",
   "version": "1.0.0",
-  "description": "Showing the power of Plaid Link",
+  "description": "Demo for account list table using Plaid Link",
   "main": "index.js",
   "author": "Stephen Wai",
   "dependencies": {
     "envvar": "1.0.x",
     "express": "4.12.x",
     "plaid": "1.0.x"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
+  "engines": {
+    "node": "0.12.2"
+  },
+  "repository":  {
+    "type": "git",
+    "url": "https://github.com/swaiing/link-myaccounts"
+  },
+  "license": "MIT"
 }
