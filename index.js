@@ -35,5 +35,5 @@ app.get('/accounts', function(req, res, next) {
 });
 
 var server = app.listen(app.get('port'), function () {
-    console.log('Server listening on port ' + String(APP_PORT));
+    console.log('Server listening on port ' + app.get('port'));
 });
