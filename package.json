@@ -1,0 +1,12 @@
+{
+  "name": "link-myaccounts",
+  "version": "1.0.0",
+  "description": "Showing the power of Plaid Link",
+  "main": "index.js",
+  "author": "Stephen Wai",
+  "dependencies": {
+    "envvar": "1.0.x",
+    "express": "4.12.x",
+    "plaid": "1.0.x"
+  }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="accounts">
+<head>
+    <meta charset="utf-8">
+    <title>Add Account Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/bootstrap.icon-large.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div ng-controller="AddAccountsController">
+        <h2>My Accounts</h2>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button class="btn btn-primary btn-block" type="button" ng-click="addAcct()">Link Account</button>
+            </li>
+            <li class="list-group-item acct-item" ng-repeat="acct in accts">
+                <i class="icon-large {{acct.icon}}"></i>
+                <span class="acct-name">{{acct.name}}</span>
+                <span class="acct-num">({{acct.number}})</span>
+                <span class="acct-bal pull-right {{acct.balanceStyle}}">{{acct.balance | currency}}</span>
+            </li>
+        </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plaid.com/link/stable/link-initialize.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

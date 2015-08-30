@@ -1,0 +1,31 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: #424242;
+}
+
+h2 {
+    font-size: 24px;
+    color: #424242;
+}
+
+#plaid-link-button {}
+
+.container {
+    padding-top: 50px;
+    width: 600px;
+}
+.acct-item {
+    padding: 15px
+}
+.acct-item i {
+    vertical-align: middle;
+}
+.acct-name {
+    margin-left: 20px;
+}
+.acct-num {
+    margin-left: 5px;
+}
+.acct-bal {}
+.balance-cc {}
