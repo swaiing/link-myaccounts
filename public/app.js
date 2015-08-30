@@ -69,7 +69,7 @@
     // 'Link Account' handler
     $scope.addAcct = function () {
         Plaid.create({
-            clientName: 'Add Accounts Demo',
+            clientName: 'My Accounts',
             env: 'tartan',
             product: 'auth',
             key: '3de900bd65d2e9abfb55a3ac38db33', // Plaid public key
