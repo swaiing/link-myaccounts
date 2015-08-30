@@ -4,7 +4,6 @@ var envvar = require('envvar');
 var express = require('express');
 var plaid = require('plaid');
 
-var APP_PORT = envvar.number('APP_PORT');
 var PLAID_CLIENT_ID = envvar.string('PLAID_CLIENT_ID');
 var PLAID_SECRET = envvar.string('PLAID_SECRET');
 
@@ -12,6 +11,7 @@ var pc = new plaid.Client(PLAID_CLIENT_ID, PLAID_SECRET, plaid.environments.tart
 
 var app = express();
 app.use(express.static('public'));
+app.set('port', (process.env.PORT || 5000));
 
 app.get('/accounts', function(req, res, next) {
     var public_token = req.query.public_token;
@@ -34,6 +34,6 @@ app.get('/accounts', function(req, res, next) {
     });
 });
 
-var server = app.listen(APP_PORT, function () {
+var server = app.listen(app.get('port'), function () {
     console.log('Server listening on port ' + String(APP_PORT));
 });
