@@ -9,21 +9,56 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div ng-controller="AddAccountsController">
-        <h2>My Accounts</h2>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <button class="btn btn-primary btn-block" type="button" ng-click="addAcct()">Link Account</button>
-            </li>
-            <li class="list-group-item acct-item" ng-repeat="acct in accts">
-                <i class="icon-large {{acct.icon}}"></i>
-                <span class="acct-name">{{acct.name}}</span>
-                <span class="acct-num">({{acct.number}})</span>
-                <span class="acct-bal pull-right {{acct.balanceStyle}}">{{acct.balance | currency}}</span>
-            </li>
-        </ul>
-    </div>
+    <div class="container" ng-controller="AddAccountsController">
+    <div class="row">
+
+        <h1>Plaid Link and Connect API Demo</h1>
+        <div class="col-md-5 my-accounts">
+            <h2>My Accounts</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <button class="btn btn-primary btn-block" type="button" ng-click="addAcct()">Link Account</button>
+                </li>
+                <li class="list-group-item acct-item"
+                            ng-repeat="acct in accts"
+                            ng-click="showTransactions(acct.id)"
+                            ng-class="{ 'selected-row': acct.id == selectedIndex }">
+                    <i class="icon-large {{acct.icon}}"></i>
+                    <span class="acct-name">{{acct.name}}</span>
+                    <span class="acct-num">({{acct.number}})</span>
+                </li>
+            </ul>
+        </div> <!-- /span2-->
+
+        <div class="col-md-7 my-transactions" ng-show="!transactions">
+            <h2>My Transactions</h2>
+            <p>Please link your account to show transactions from the last 30 days.</p>
+            <p>[no transactions available]</p>
+        </div> <!-- /col-md-7-->
+
+        <div class="col-md-7 my-transactions" ng-show="transactions">
+            <h2>My Transactions - {{name}}</h2>
+            <p class="acct-bal">Current Balance: {{balance | currency}}</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th class="trans-amt">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="t in transactions">
+                        <td>{{t.date}}</td>
+                        <td>{{t.name}}</td>
+                        <td class="trans-amt">{{t.amount | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- /span10-->
+
+    </div><!-- /row-fluid-->
+    </div><!-- /container-fluid-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdn.plaid.com/link/stable/link-initialize.js"></script>

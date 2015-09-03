@@ -51,18 +51,22 @@
     // static account data
     var staticAccts = [
     {
-        name: "Bank of America Savings",
-        number: AcctFormat.number("depository", "1752"),
-        balance: "8912.41",
+        name: "Static Savings",
+        number: AcctFormat.number("depository", "9999"),
+        balance: "5000.00",
         icon: "icon-bank",
         balanceStyle: AcctFormat.balanceStyle("depository"),
+        id: 0,
+        token: "public_key",
     },
         {
-        name: "Citi Credit Card",
-        number: AcctFormat.number("credit", "1823"),
-        balance: "-2571.41",
+        name: "Static Credit Card",
+        number: AcctFormat.number("credit", "4000"),
+        balance: "-800.00",
         icon: "icon-credit-card",
         balanceStyle: AcctFormat.balanceStyle("credit"),
+        id: 1,
+        token: "public_key",
         }];
     $scope.accts = staticAccts;
 
@@ -87,12 +91,17 @@
         }).success(function (data, status, headers, config) {
             var newAccts = processAccounts(data.accounts);
             angular.forEach(newAccts, function (acct, key) {
-                $scope.accts.push({ name: acct.name,
+                $scope.accts.push({ 
+                    name: acct.name,
                     number: acct.number,
                     balance: acct.balance,
                     icon: acct.icon,
-                    balanceStyle: acct.balanceStyle
+                    balanceStyle: acct.balanceStyle,
+                    id: $scope.accts.length,
+                    token: token,
                 });
+                $scope.balance = acct.balance;
+                $scope.name = acct.name;
             });
 
         }).error(function (data, status, headers, config) {
@@ -115,11 +124,38 @@
                     number: number,
                     balance: balance,
                     icon: icon,
-                    balanceStyle: balanceStyle });
+                    balanceStyle: balanceStyle,
+                });
             }
         }, accts);
         return accts;
     };
+
+    // row click handler
+    $scope.showTransactions = function (id) {
+        $scope.selectedIndex = id;
+        // do nothing for static account placeholders
+        if (id == 0 || id == 1) {
+            $scope.transactions = null;
+            return;
+        }
+        var token = $scope.accts[id].token;
+        callConnect(token);
+    }
+
+    var callConnect = function (token) {
+        $http({
+            url: "/transactions",
+            method: "GET",
+            params: { public_token:token }
+        }).success(function (data, status, headers, config) {
+            //console.log("Transactions: " + JSON.stringify(data.transactions));
+            $scope.transactions = data.transactions;
+        }).error(function (data, status, headers, config) {
+            alert("There was a problem retrieving your account, status: " + status + ". Response: " + data);
+        });
+    };
+
 
     }]); // app.controller
 
